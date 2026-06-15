@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.unreceivedrewardlist
+package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,7 +15,7 @@ import com.cheesecomer.rewardseal.model.RewardMilestone
 import kotlinx.coroutines.launch
 
 
-class UnreceivedRewardListViewModel(
+class ExchangeableRewardListViewModel(
     private val rewardSheetRepository: RewardSheetRepository,
     private val completedRewardSheetRepository: CompletedRewardSheetRepository,
     private val milestoneRepository: RewardMilestoneRepository
@@ -28,7 +28,7 @@ class UnreceivedRewardListViewModel(
         ): ViewModelProvider.Factory =
             viewModelFactory {
                 initializer {
-                    UnreceivedRewardListViewModel(
+                    ExchangeableRewardListViewModel(
                         rewardSheetRepository,
                         completedRewardSheetRepository,
                         milestoneRepository
@@ -38,7 +38,7 @@ class UnreceivedRewardListViewModel(
     }
 
     var uiState by mutableStateOf(
-        UnreceivedRewardListUiState()
+        ExchangeableRewardListUiState()
     )
         private set
 

@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.unreceivedrewardlist
+package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
 
 import com.cheesecomer.rewardseal.model.RewardMilestone
 
@@ -10,6 +10,6 @@ data class ExchangeableRewardListItemState(
     val nextMilestone: RewardMilestone?
 )
 
-data class UnreceivedRewardListUiState(
+data class ExchangeableRewardListUiState(
     val sheets: List<ExchangeableRewardListItemState> = emptyList()
 )

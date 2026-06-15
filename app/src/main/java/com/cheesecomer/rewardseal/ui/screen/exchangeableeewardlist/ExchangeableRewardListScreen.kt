@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.unreceivedrewardlist
+package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -32,15 +31,14 @@ import com.cheesecomer.rewardseal.RewardSealApplication
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UnreceivedRewardListScreen(
+fun ExchangeableRewardListScreen(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit = {},
-    onRestartWithEditClick: (sheetId: Long) -> Unit,
+    onBackClick: () -> Unit = {}
 ) {
     val application =
         LocalContext.current.applicationContext as RewardSealApplication
-    val viewModel: UnreceivedRewardListViewModel = viewModel(
-        factory = UnreceivedRewardListViewModel.factory(
+    val viewModel: ExchangeableRewardListViewModel = viewModel(
+        factory = ExchangeableRewardListViewModel.factory(
             application.rewardSheetRepository,
             application.completedRewardSheetRepository,
             application.rewardMilestoneRepository
@@ -48,7 +46,7 @@ fun UnreceivedRewardListScreen(
     )
     val uiState = viewModel.uiState
     val sheets = uiState.sheets
-    var showExchangeDialog by remember { mutableLongStateOf(0L) }
+        var showExchangeDialog by remember { mutableLongStateOf(0L) }
     if (showExchangeDialog != 0L) {
         val sheet = sheets.find { it.id == showExchangeDialog }!!
         if (sheet.exchangeableMilestones.size == 1) {

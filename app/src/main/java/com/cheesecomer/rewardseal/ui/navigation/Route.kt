@@ -5,7 +5,7 @@ object Route {
     const val SHEET_EDIT = "sheet_edit"
     const val SHEET_EDIT_WITH_ID = "sheet_edit/{sheetId}"
     const val SHEET_DETAIL = "sheet_detail/{sheetId}"
-    const val UNRECEIVED_REWARD_LIST = "unreceived_reward_list"
+    const val EXCHANGEABLE_REWARD_LIST = "exchangeable_reward_list"
     const val COMPLETED_REWARD_LIST = "completed_reward_list"
     const val COMPLETED_REWARD_DETAIL = "completed_reward_detail/{completedRewardId}"
 

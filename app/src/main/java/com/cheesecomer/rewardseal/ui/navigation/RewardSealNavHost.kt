@@ -10,7 +10,7 @@ import com.cheesecomer.rewardseal.ui.screen.completedrewardlist.CompletedRewardL
 import com.cheesecomer.rewardseal.ui.screen.sheetdetail.SheetDetailScreen
 import com.cheesecomer.rewardseal.ui.screen.sheetedit.SheetEditScreen
 import com.cheesecomer.rewardseal.ui.screen.sheetlist.SheetListScreen
-import com.cheesecomer.rewardseal.ui.screen.unreceivedrewardlist.UnreceivedRewardListScreen
+import com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist.ExchangeableRewardListScreen
 
 @Composable
 fun RewardSealNavHost(
@@ -30,7 +30,7 @@ fun RewardSealNavHost(
                     )
                 },
                 onUnreceivedRewardsClick = {
-                    navController.navigate(Route.UNRECEIVED_REWARD_LIST)
+                    navController.navigate(Route.EXCHANGEABLE_REWARD_LIST)
                 },
                 onCompletedRewardsClick = {
                     navController.navigate(Route.COMPLETED_REWARD_LIST)
@@ -93,13 +93,10 @@ fun RewardSealNavHost(
                 }
             )
         }
-        composable(Route.UNRECEIVED_REWARD_LIST) {
-            UnreceivedRewardListScreen(
+        composable(Route.EXCHANGEABLE_REWARD_LIST) {
+            ExchangeableRewardListScreen(
                 onBackClick = {
                     navController.popBackStack()
-                },
-                onRestartWithEditClick = { sheetId ->
-                    navController.navigate(Route.sheetEdit(sheetId))
                 }
             )
         }
