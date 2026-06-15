@@ -141,6 +141,7 @@ fun SheetDetailScreen(
             if (sheet.currentCount >= sheet.goalCount) {
                 Text("ごほうび達成！ ${sheet.reward}")
             }
+            RewardBoardView(sheet = sheet, modifier = Modifier.weight(1f),)
         }
     }
 }
