@@ -1,0 +1,95 @@
+package com.cheesecomer.rewardseal.ui.screen.sheetedit
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.cheesecomer.rewardseal.data.repository.CompletedRewardSheetRepository
+import com.cheesecomer.rewardseal.data.repository.RewardSheetRepository
+import com.cheesecomer.rewardseal.model.RewardSheet
+import com.cheesecomer.rewardseal.ui.screen.sheetlist.SheetListViewModel
+import kotlinx.coroutines.launch
+
+class SheetEditViewModel(
+    private val rewardSheetRepository: RewardSheetRepository,
+) : ViewModel() {
+    companion object {
+        fun factory(
+            rewardSheetRepository: RewardSheetRepository,
+        ): ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    SheetEditViewModel(
+                        rewardSheetRepository
+                    )
+                }
+            }
+    }
+
+    var uiState by mutableStateOf(
+        SheetEditUiState()
+    )
+        private set
+
+    fun load(sheetId: Long) {
+        viewModelScope.launch {
+            val sheet = rewardSheetRepository.findById(sheetId)
+            if (sheet == null) return@launch
+
+            uiState = uiState.copy(
+                sheetId = sheetId,
+                title = sheet.title,
+                reward = sheet.reward,
+                goalCount = sheet.goalCount
+            )
+        }
+    }
+
+    fun updateTitle(title: String) {
+        uiState = uiState.copy(
+            title = title
+        )
+    }
+
+    fun updateReward(reward: String) {
+        uiState = uiState.copy(
+            reward = reward
+        )
+    }
+
+    fun incrementGoalCount() {
+        uiState = uiState.copy(
+            goalCount = uiState.goalCount + 1
+        )
+    }
+
+    fun decrementGoalCount() {
+        if (uiState.goalCount <= 1) {
+            return
+        }
+
+        uiState = uiState.copy(
+            goalCount = uiState.goalCount - 1
+        )
+    }
+    fun createRewardSheet(): RewardSheet {
+        return RewardSheet(
+            id = uiState.sheetId,
+            title = uiState.title,
+            reward = uiState.reward,
+            currentCount = 0,
+            goalCount = uiState.goalCount,
+        )
+    }
+    fun save() {
+        viewModelScope.launch {
+            rewardSheetRepository.save(
+                createRewardSheet()
+            )
+        }
+    }
+}
