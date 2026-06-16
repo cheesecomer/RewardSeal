@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
+package com.cheesecomer.rewardseal.feature.exchangeable_reward.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

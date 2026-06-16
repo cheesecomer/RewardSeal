@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui
+package com.cheesecomer.rewardseal
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -11,8 +11,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.cheesecomer.rewardseal.ui.navigation.RewardSealNavHost
-import com.cheesecomer.rewardseal.ui.navigation.Route
+import com.cheesecomer.rewardseal.navigation.RewardSealNavHost
+import com.cheesecomer.rewardseal.navigation.Route
 @Composable
 fun App() {
     val navController = rememberNavController()

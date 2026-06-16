@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.navigation
+package com.cheesecomer.rewardseal.navigation
 
 object Route {
     const val SHEET_LIST = "sheet_list"

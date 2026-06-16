@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.completedrewardlist
+package com.cheesecomer.rewardseal.feature.completed_sheet.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,19 +18,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cheesecomer.rewardseal.RewardSealApplication
 
 @Composable
-fun CompletedRewardListScreen(
+fun CompletedSheetListScreen(
     modifier: Modifier = Modifier,
     onRewardClick: (Long) -> Unit = {},
 ) {
     val application =
         LocalContext.current.applicationContext as RewardSealApplication
-    val viewModel: CompletedRewardListViewModel = viewModel(
-        factory = CompletedRewardListViewModel.factory(
+    val viewModel: CompletedSheetListViewModel = viewModel(
+        factory = CompletedSheetListViewModel.factory(
             application.completedRewardSheetRepository,
         )
     )
 
-    val rewards = viewModel.rewards
+    val sheets = viewModel.sheets
 
     Column (
         modifier = modifier.padding(16.dp),
@@ -41,12 +41,12 @@ fun CompletedRewardListScreen(
             style = MaterialTheme.typography.headlineMedium,
         )
 
-        Text("達成したごほうび：${rewards.size}こ")
+        Text("達成したごほうび：${sheets.size}こ")
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            items(rewards) { reward ->
+            items(sheets) { reward ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

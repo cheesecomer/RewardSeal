@@ -1,5 +1,6 @@
-package com.cheesecomer.rewardseal.ui.screen.completedrewarddetail
+package com.cheesecomer.rewardseal.feature.completed_sheet.detail
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,10 +12,9 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.cheesecomer.rewardseal.data.repository.CompletedRewardSheetRepository
 import com.cheesecomer.rewardseal.data.repository.RewardStampRepository
 import com.cheesecomer.rewardseal.model.CompletedRewardSheet
-import com.cheesecomer.rewardseal.ui.screen.completedrewardlist.CompletedRewardListViewModel
 import kotlinx.coroutines.launch
 
-class CompletedRewardDetailViewModel(
+class CompletedSheetDetailViewModel(
     private val completedRewardSheetRepository: CompletedRewardSheetRepository,
     private val rewardStampRepository: RewardStampRepository
 
@@ -26,7 +26,7 @@ class CompletedRewardDetailViewModel(
         ): ViewModelProvider.Factory =
             viewModelFactory {
                 initializer {
-                    CompletedRewardDetailViewModel(
+                    CompletedSheetDetailViewModel(
                         completedRewardSheetRepository,
                         rewardStampRepository
                     )
@@ -35,7 +35,7 @@ class CompletedRewardDetailViewModel(
     }
 
     var uiState by mutableStateOf(
-        CompletedRewardDetailUiState()
+        CompletedSheetDetailUiState()
     )
         private set
 

@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetedit
+package com.cheesecomer.rewardseal.feature.sheet.edit
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MilestoneFormList(
-    milestones: List<RewardMilestoneForm>,
+    milestones: List<RewardMilestoneUiState>,
     onRequiredCompletionsChange: (index: Int, value: String) -> Unit,
     onRewardChange: (index: Int, value: String) -> Unit,
     onAddClick: () -> Unit,
@@ -59,7 +59,7 @@ fun MilestoneFormList(
 @Composable
 private fun MilestoneFormItem(
     index: Int,
-    milestone: RewardMilestoneForm,
+    milestone: RewardMilestoneUiState,
     canRemove: Boolean,
     onRequiredCompletionsChange: (index: Int, value: String) -> Unit,
     onRewardChange: (index: Int, value: String) -> Unit,

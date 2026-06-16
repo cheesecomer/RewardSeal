@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetedit
+package com.cheesecomer.rewardseal.feature.sheet.edit
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -157,7 +157,9 @@ fun SheetEditScreen(
 
         Button(
             onClick = {
-                viewModel.save(onSaveClick)
+                viewModel.save {
+                    onSaveClick()
+                }
             },
             modifier = Modifier.fillMaxWidth(),
             enabled = uiState.title.isNotBlank() && uiState.hasReward(),

@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetdetail
+package com.cheesecomer.rewardseal.feature.sheet.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cheesecomer.rewardseal.RewardSealApplication
 import com.cheesecomer.rewardseal.model.RewardSheet
 import com.cheesecomer.rewardseal.model.RewardStamp
+import com.cheesecomer.rewardseal.model.StampType
 import com.cheesecomer.rewardseal.ui.component.RewardBoardState
 import com.cheesecomer.rewardseal.ui.component.RewardBoardView
 import com.cheesecomer.rewardseal.ui.component.dialog.DeleteSheetDialog
@@ -69,23 +70,84 @@ private fun CompletedSheetActions(
     }
 }
 
+private enum class SheetDetailDialog {
+    Stamp,
+    Delete,
+}
+
+@Composable
+private fun SheetDetailDialogs(
+    activeDialog: SheetDetailDialog?,
+    onDismissRequest: () -> Unit,
+    onDeleteRequest: () -> Unit,
+    onStampTypeSelected: (StampType) -> Unit,
+) {
+    when (activeDialog) {
+        SheetDetailDialog.Delete -> {
+            DeleteSheetDialog(
+                onDeleteRequest = onDeleteRequest,
+                onDismissRequest = onDismissRequest,
+            )
+        }
+
+        SheetDetailDialog.Stamp -> {
+            SelectStampDialog(
+                onDismissRequest = onDismissRequest,
+                onStampTypeSelected = onStampTypeSelected,
+            )
+        }
+
+        null -> Unit
+    }
+}
+
 @Composable
 private fun ProgressSheet(
     sheet: RewardSheet,
     stamps: List<RewardStamp>,
-    onShowStampDialogRequest: () -> Unit,
-    onShowDeleteDialogRequest: () -> Unit
+    onEditRequest: () -> Unit,
+    onDeleteRequest: () -> Unit,
+    onStampTypeSelected: (StampType) -> Unit,
 ) {
+    var activeDialog by remember { mutableStateOf<SheetDetailDialog?>(null) }
+
+
+    SheetDetailDialogs(
+        activeDialog = activeDialog,
+        onDismissRequest = {
+            activeDialog = null
+        },
+        onDeleteRequest = {
+            activeDialog = null
+            onDeleteRequest()
+        },
+        onStampTypeSelected = { stampType ->
+            activeDialog = null
+            onStampTypeSelected(stampType)
+        },
+    )
+
     Column {
         Text("${sheet.currentCount} / ${sheet.goalCount}")
         Button(
-            onClick = onShowStampDialogRequest,
+            onClick = {
+                activeDialog = SheetDetailDialog.Stamp
+            },
             enabled = sheet.currentCount < sheet.goalCount,
         ) {
             Text("スタンプを押す")
         }
+
         Button(
-            onClick = onShowDeleteDialogRequest
+            onClick = onEditRequest
+        ) {
+            Text("編集")
+        }
+
+        Button(
+            onClick = {
+                activeDialog = SheetDetailDialog.Delete
+            }
         ) {
             Text("削除")
         }
@@ -107,6 +169,7 @@ private fun ProgressSheet(
 fun SheetDetailScreen(
     sheetId: Long,
     onBackClick: () -> Unit = {},
+    onEditClick: () -> Unit = {},
     onDeleteClick: () -> Unit = {},
     onRestartWithEditClick: (sheetId: Long) -> Unit,
 ) {
@@ -123,43 +186,12 @@ fun SheetDetailScreen(
     LaunchedEffect(sheetId) {
         viewModel.load(sheetId)
     }
-    var showStampDialog by remember { mutableStateOf(false) }
-    var showDeleteDialog by remember {
-        mutableStateOf(false)
-    }
 
     val uiState = viewModel.uiState
     val sheet = uiState.sheet
     if (sheet == null) {
         Text("見つかりません")
         return
-    }
-
-    if (showDeleteDialog) {
-        DeleteSheetDialog(
-            onDeleteRequest = {
-                showDeleteDialog = false
-                viewModel.delete(sheetId)
-                onDeleteClick()
-            },
-            onDismissRequest = {
-                showDeleteDialog = false
-            }
-        )
-    }
-    if (showStampDialog) {
-        SelectStampDialog(
-            onDismissRequest = {
-                showStampDialog = false
-            },
-            onStampTypeSelected = { stampType ->
-                showStampDialog = false
-                viewModel.increment(
-                    sheetId = sheetId,
-                    stampType = stampType,
-                )
-            }
-        )
     }
 
     Column {
@@ -192,11 +224,17 @@ fun SheetDetailScreen(
             ProgressSheet(
                 sheet = sheet,
                 stamps = uiState.stamps,
-                onShowStampDialogRequest = {
-                    showStampDialog = true
+                onEditRequest = onEditClick,
+                onDeleteRequest = {
+                    viewModel.delete(sheetId) {
+                        onDeleteClick()
+                    }
                 },
-                onShowDeleteDialogRequest = {
-                    showDeleteDialog = true
+                onStampTypeSelected = { stampType ->
+                    viewModel.increment(
+                        sheetId = sheetId,
+                        stampType = stampType,
+                    )
                 },
             )
         }

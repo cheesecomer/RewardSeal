@@ -1,19 +1,17 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetedit
+package com.cheesecomer.rewardseal.feature.sheet.edit
 
-import com.cheesecomer.rewardseal.data.source.database.entity.CompletedRewardSheetEntity
-import com.cheesecomer.rewardseal.model.CompletedRewardSheet
 import com.cheesecomer.rewardseal.model.RewardMilestone
 
 
-fun RewardMilestone.toUiState(): RewardMilestoneForm {
-    return RewardMilestoneForm(
+fun RewardMilestone.toUiState(): RewardMilestoneUiState {
+    return RewardMilestoneUiState(
         id = id,
         requiredCompletions = requiredCompletions.toString(),
         reward = reward,
     )
 }
 
-data class RewardMilestoneForm(
+data class RewardMilestoneUiState(
     val id: Long = 0,
     val requiredCompletions: String = "",
     val reward: String = "",
@@ -23,8 +21,8 @@ data class SheetEditUiState(
     val sheetId: Long = 0,
     val title: String = "",
     val goalCount: Int = 10,
-    val milestones: List<RewardMilestoneForm> = listOf(
-        RewardMilestoneForm(
+    val milestones: List<RewardMilestoneUiState> = listOf(
+        RewardMilestoneUiState(
             requiredCompletions = "1",
         ),
     ),

@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.completedrewarddetail
+package com.cheesecomer.rewardseal.feature.completed_sheet.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,28 +15,28 @@ import com.cheesecomer.rewardseal.ui.component.RewardBoardState
 import com.cheesecomer.rewardseal.ui.component.RewardBoardView
 
 @Composable
-fun CompletedRewardDetailScreen(
+fun CompletedSheetDetailScreen(
     modifier: Modifier = Modifier,
     completedRewardId: Long,
 ) {
     val application =
         LocalContext.current.applicationContext as RewardSealApplication
-    val viewModel: CompletedRewardDetailViewModel = viewModel(
-        factory = CompletedRewardDetailViewModel.factory(
+    val viewModel: CompletedSheetDetailViewModel = viewModel(
+        factory = CompletedSheetDetailViewModel.factory(
             application.completedRewardSheetRepository,
             application.rewardStampRepository
         )
     )
+
+    LaunchedEffect(completedRewardId) {
+        viewModel.load(completedRewardId)
+    }
 
     val uiState = viewModel.uiState
     val reward = uiState.reward
     if (reward == null) {
         Text("見つかりません")
         return
-    }
-
-    LaunchedEffect(completedRewardId) {
-        viewModel.load(completedRewardId)
     }
 
     Column(

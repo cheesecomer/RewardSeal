@@ -1,6 +1,5 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetdetail
+package com.cheesecomer.rewardseal.feature.sheet.detail
 
-import com.cheesecomer.rewardseal.model.RewardMilestone
 import com.cheesecomer.rewardseal.model.RewardSheet
 import com.cheesecomer.rewardseal.model.RewardStamp
 

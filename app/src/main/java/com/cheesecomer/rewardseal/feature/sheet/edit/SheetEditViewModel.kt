@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetedit
+package com.cheesecomer.rewardseal.feature.sheet.edit
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,12 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.cheesecomer.rewardseal.data.repository.CompletedRewardSheetRepository
 import com.cheesecomer.rewardseal.data.repository.RewardMilestoneRepository
 import com.cheesecomer.rewardseal.data.repository.RewardSheetRepository
 import com.cheesecomer.rewardseal.model.RewardMilestone
 import com.cheesecomer.rewardseal.model.RewardSheet
-import com.cheesecomer.rewardseal.ui.screen.sheetlist.SheetListViewModel
 import kotlinx.coroutines.launch
 
 class SheetEditViewModel(
@@ -77,7 +75,7 @@ class SheetEditViewModel(
     }
     fun addMilestone() {
         uiState = uiState.copy(
-            milestones = uiState.milestones + RewardMilestoneForm(),
+            milestones = uiState.milestones + RewardMilestoneUiState(),
         )
     }
     fun removeMilestone(index: Int) {

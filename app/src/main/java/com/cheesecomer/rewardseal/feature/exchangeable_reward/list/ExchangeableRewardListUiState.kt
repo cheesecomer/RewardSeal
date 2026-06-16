@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
+package com.cheesecomer.rewardseal.feature.exchangeable_reward.list
 
 import com.cheesecomer.rewardseal.model.RewardMilestone
 

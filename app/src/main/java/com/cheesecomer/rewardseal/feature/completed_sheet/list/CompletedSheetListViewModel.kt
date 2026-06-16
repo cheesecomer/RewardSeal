@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.completedrewardlist
+package com.cheesecomer.rewardseal.feature.completed_sheet.list
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
@@ -12,7 +12,7 @@ import com.cheesecomer.rewardseal.data.repository.CompletedRewardSheetRepository
 import com.cheesecomer.rewardseal.model.CompletedRewardSheet
 import kotlinx.coroutines.launch
 
-class CompletedRewardListViewModel(
+class CompletedSheetListViewModel(
     private val completedRewardSheetRepository: CompletedRewardSheetRepository
 
 ) : ViewModel() {
@@ -22,14 +22,14 @@ class CompletedRewardListViewModel(
         ): ViewModelProvider.Factory =
             viewModelFactory {
                 initializer {
-                    CompletedRewardListViewModel(
+                    CompletedSheetListViewModel(
                         completedRewardSheetRepository
                     )
                 }
             }
     }
 
-    var rewards by mutableStateOf<List<CompletedRewardSheet>>(emptyList())
+    var sheets by mutableStateOf<List<CompletedRewardSheet>>(emptyList())
         private set
 
     init {
@@ -38,7 +38,10 @@ class CompletedRewardListViewModel(
 
     fun reload() {
         viewModelScope.launch {
-            rewards = completedRewardSheetRepository.findAll()
+            sheets = completedRewardSheetRepository.findAll()
+            sheets.forEach {
+                android.util.Log.d("findExchangeable", "${it.title} / ${it.sheetId} : ${it.consumedAt}")
+            }
         }
     }
 }

@@ -1,16 +1,17 @@
-package com.cheesecomer.rewardseal.ui.navigation
+package com.cheesecomer.rewardseal.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.cheesecomer.rewardseal.ui.screen.completedrewarddetail.CompletedRewardDetailScreen
-import com.cheesecomer.rewardseal.ui.screen.completedrewardlist.CompletedRewardListScreen
-import com.cheesecomer.rewardseal.ui.screen.sheetdetail.SheetDetailScreen
-import com.cheesecomer.rewardseal.ui.screen.sheetedit.SheetEditScreen
-import com.cheesecomer.rewardseal.ui.screen.sheetlist.SheetListScreen
-import com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist.ExchangeableRewardListScreen
+import com.cheesecomer.rewardseal.feature.completed_sheet.detail.CompletedSheetDetailScreen
+import com.cheesecomer.rewardseal.feature.completed_sheet.list.CompletedSheetListScreen
+import com.cheesecomer.rewardseal.feature.sheet.detail.SheetDetailScreen
+import com.cheesecomer.rewardseal.feature.sheet.edit.SheetEditScreen
+import com.cheesecomer.rewardseal.feature.sheet.list.SheetListScreen
+import com.cheesecomer.rewardseal.feature.exchangeable_reward.list.ExchangeableRewardListScreen
 
 @Composable
 fun RewardSealNavHost(
@@ -90,6 +91,9 @@ fun RewardSealNavHost(
                 },
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onEditClick = {
+                    navController.navigate(Route.sheetEdit(sheetId))
                 }
             )
         }
@@ -101,7 +105,7 @@ fun RewardSealNavHost(
             )
         }
         composable(Route.COMPLETED_REWARD_LIST) {
-            CompletedRewardListScreen(
+            CompletedSheetListScreen(
                 onRewardClick = { completedRewardId ->
                     navController.navigate(
                         Route.completedRewardDetail(completedRewardId)
@@ -116,7 +120,7 @@ fun RewardSealNavHost(
                     ?.toLong()
                     ?: 0L
 
-            CompletedRewardDetailScreen(
+            CompletedSheetDetailScreen(
                 completedRewardId = completedRewardId
             )
         }

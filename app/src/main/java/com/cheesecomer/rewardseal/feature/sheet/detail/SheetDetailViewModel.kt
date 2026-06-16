@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetdetail
+package com.cheesecomer.rewardseal.feature.sheet.detail
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -103,9 +103,10 @@ class SheetDetailViewModel(
         }
     }
 
-    fun delete(sheetId: Long) {
+    fun delete(sheetId: Long, onCompleted: () -> Unit) {
         viewModelScope.launch {
             rewardSheetRepository.delete(sheetId)
+            onCompleted()
         }
     }
 

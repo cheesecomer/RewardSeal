@@ -1,6 +1,7 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetlist
+package com.cheesecomer.rewardseal.feature.sheet.list
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -37,10 +38,10 @@ class SheetListViewModel(
     )
         private set
 
-    var unreceivedRewardCount by mutableStateOf(0)
+    var exchangeableSheetCount by mutableIntStateOf(0)
         private set
 
-    var completedRewardCount by mutableStateOf(0)
+    var completedSheetCount by mutableIntStateOf(0)
         private set
 
     init {
@@ -50,8 +51,8 @@ class SheetListViewModel(
     fun reload() {
         viewModelScope.launch {
             sheets = rewardSheetRepository.findAll()
-            unreceivedRewardCount = completedRewardSheetRepository.countUnreceived()
-            completedRewardCount = completedRewardSheetRepository.countAll()
+            exchangeableSheetCount = rewardSheetRepository.countExchangeable()
+            completedSheetCount = completedRewardSheetRepository.countAll()
         }
     }
 }

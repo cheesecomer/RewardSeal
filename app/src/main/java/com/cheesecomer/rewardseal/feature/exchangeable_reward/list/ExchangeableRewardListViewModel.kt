@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.exchangeableeewardlist
+package com.cheesecomer.rewardseal.feature.exchangeable_reward.list
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,10 +64,11 @@ class ExchangeableRewardListViewModel(
         }
     }
 
-    fun receiveReward(id: Long, milestone: RewardMilestone) {
+    fun receiveReward(id: Long, milestone: RewardMilestone, onCompleted: () -> Unit = {} ) {
         viewModelScope.launch {
             completedRewardSheetRepository.markRewardReceived(id, milestone.requiredCompletions)
             reload()
+            onCompleted()
         }
     }
 }

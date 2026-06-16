@@ -1,4 +1,4 @@
-package com.cheesecomer.rewardseal.ui.screen.sheetlist
+package com.cheesecomer.rewardseal.feature.sheet.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,7 +47,7 @@ fun SheetListScreen(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        val unreceivedRewardCount = viewModel.unreceivedRewardCount
+        val unreceivedRewardCount = viewModel.exchangeableSheetCount
         if (unreceivedRewardCount > 0) {
             Card(
                 modifier = Modifier
@@ -63,7 +63,7 @@ fun SheetListScreen(
                 )
             }
         }
-        val completedRewardCount = viewModel.completedRewardCount
+        val completedRewardCount = viewModel.completedSheetCount
         if (completedRewardCount > 0) {
             Card(
                 modifier = Modifier
