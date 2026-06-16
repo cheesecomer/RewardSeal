@@ -25,10 +25,13 @@ class RewardSheetRepository(
             return entity.id
         }
     }
+
     suspend fun findExchangeable(): List<RewardSheet> {
         return dao.findExchangeable()
             .map { it.toModel() }
     }
+
+    suspend fun countExchangeable() = dao.countExchangeable()
 
     suspend fun findAll(): List<RewardSheet> {
         return dao.findAll()

@@ -27,7 +27,7 @@ import com.cheesecomer.rewardseal.model.RewardStamp
 import com.cheesecomer.rewardseal.model.StampType
 import kotlin.random.Random
 
-fun connectionPoint(
+private fun connectionPoint(
     point: Offset,
     radius: Float,
     isExit: Boolean,
@@ -39,13 +39,13 @@ fun connectionPoint(
     }
 }
 
-fun pointOffset(index: Int): Float {
+private fun pointOffset(index: Int): Float {
     val random = Random(index)
 
     return random.nextFloat() * 80f - 40f
 }
 
-fun stampOffset(position: Int): Pair<Float, Float> {
+private fun stampOffset(position: Int): Pair<Float, Float> {
     val random = Random(position)
 
     return Pair(
