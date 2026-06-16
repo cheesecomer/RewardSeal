@@ -14,6 +14,8 @@ room = "2.7.2"
 ktlint = "13.1.0"
 detekt = "1.23.8"
 composeRules = "0.6.1"
+truth = "1.4.5"
+coroutinesTest = "1.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +37,8 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 ktlint-compose-rules = { module = "io.nlopez.compose.rules:ktlint", version.ref = "composeRules" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
