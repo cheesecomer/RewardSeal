@@ -176,12 +176,9 @@ private fun SheetDescription(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "シートをすべてうめて",
-                style = MaterialTheme.typography.bodyMedium,
-            )
-
-            Text(
-                text = "ごほうびのスタンプをもらおう！",
+                text =
+                    "シートをすべてうめて\n" +
+                        "ごほうびをもらおう！",
                 style = MaterialTheme.typography.bodyMedium,
             )
         }

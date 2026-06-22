@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -87,17 +88,14 @@ private fun EmptyList(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.size(20.dp))
         Text(
-            text = "まだ きろくがありません",
+            text = "がんばったシートはまだないよ",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
         )
         Text(
-            text = "シートをいっぱいにすると",
+            text = "最後までがんばると\nここにのこるよ♪",
             style = MaterialTheme.typography.bodyMedium,
-        )
-        Text(
-            text = "ここにのるよ",
-            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
         )
     }
 }

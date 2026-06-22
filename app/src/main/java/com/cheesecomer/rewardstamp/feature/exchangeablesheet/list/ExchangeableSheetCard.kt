@@ -236,7 +236,7 @@ private fun ExchangeButton(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
     ) {
-        Text("受け取った")
+        Text("交換する")
     }
 }
 
