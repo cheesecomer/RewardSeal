@@ -13,6 +13,8 @@ import com.cheesecomer.rewardstamp.data.repository.RewardMilestoneRepository
 import com.cheesecomer.rewardstamp.data.repository.RewardSheetRepository
 import com.cheesecomer.rewardstamp.model.RewardMilestone
 import com.cheesecomer.rewardstamp.model.RewardSheet
+import com.cheesecomer.rewardstamp.ui.component.MAX_GOAL_COUNT
+import com.cheesecomer.rewardstamp.ui.component.MIN_GOAL_COUNT
 import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
@@ -64,6 +66,8 @@ class SheetEditViewModel(
     }
 
     fun incrementGoalCount() {
+        if (uiState.goalCount >= MAX_GOAL_COUNT) return
+
         uiState =
             uiState.copy(
                 goalCount = uiState.goalCount + 1,
@@ -71,9 +75,7 @@ class SheetEditViewModel(
     }
 
     fun decrementGoalCount() {
-        if (uiState.goalCount <= 1) {
-            return
-        }
+        if (uiState.goalCount <= MIN_GOAL_COUNT) return
 
         uiState =
             uiState.copy(

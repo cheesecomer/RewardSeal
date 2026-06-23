@@ -178,3 +178,6 @@ val boardPatterns: Map<Int, List<List<Int>>> =
                 listOf(19, EMPTY_CELL, 20),
             ),
     )
+
+val MIN_GOAL_COUNT = boardPatterns.keys.min()
+val MAX_GOAL_COUNT = boardPatterns.keys.max()

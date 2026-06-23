@@ -7,6 +7,8 @@ import com.cheesecomer.rewardstamp.data.repository.RewardSheetRepository
 import com.cheesecomer.rewardstamp.data.rewardMilestone
 import com.cheesecomer.rewardstamp.data.rewardSheet
 import com.cheesecomer.rewardstamp.data.source.database.AppDatabase
+import com.cheesecomer.rewardstamp.ui.component.MAX_GOAL_COUNT
+import com.cheesecomer.rewardstamp.ui.component.MIN_GOAL_COUNT
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -76,6 +78,19 @@ class SheetEditViewModelTest {
         }
 
     @Test
+    fun incrementGoalCount_doesNotExceedUpperLimit() =
+        runTest {
+            val viewModel = createViewModel()
+
+            repeat(MAX_GOAL_COUNT) {
+                viewModel.incrementGoalCount()
+            }
+
+            assertThat(viewModel.uiState.goalCount)
+                .isEqualTo(MAX_GOAL_COUNT)
+        }
+
+    @Test
     fun decrementGoalCount_decrementsGoalCount() =
         runTest {
             val viewModel = createViewModel()
@@ -90,11 +105,12 @@ class SheetEditViewModelTest {
         runTest {
             val viewModel = createViewModel()
 
-            repeat(20) {
+            repeat(MAX_GOAL_COUNT) {
                 viewModel.decrementGoalCount()
             }
 
-            assertThat(viewModel.uiState.goalCount).isEqualTo(1)
+            assertThat(viewModel.uiState.goalCount)
+                .isEqualTo(MIN_GOAL_COUNT)
         }
 
     @Test
